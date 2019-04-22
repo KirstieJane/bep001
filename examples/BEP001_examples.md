@@ -19,3 +19,4 @@ This is a sample dataset from an MP2RAGE sequence with two inversion times, and,
 
 ## Example 4: MultiParameter Mapping (MPM) dataset
 This is a sample dataset from a MultiParameter Mapping (MPM) sequence (as per Weiskopf et al., 2013), which yields multi-echo FLASH scans that are predominantly T1-, PD-, or MT-weighted by changing repetition time and flip angle.
+Note that the raw data for these scans are not called "FLASH" (or MEGRE, following our recommended vendor-neutral notation) in their suffices, rather they are grouped together with the "MPM" suffix and the "acq" tag is used to clarify which weightings the scans are highlighting.
