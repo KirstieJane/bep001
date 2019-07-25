@@ -127,15 +127,15 @@ sub-<participant_label>/[ses-<session_label>/]
         sub-<participant_label>[_ses-<session_label>][_<indexable_metadata>-<index>][_acq-<label>][_part-<mag/phase>][_ce-<label>][_rec-<label>][_run-<index>]_<suffix>.json
 ```
 Anatomical (structural) data for a participant may refer to a simple standalone
-data (e.g. a 3D high resolution T1 weighted image), or a group of parametrically 
+data (e.g. a 3D high resolution T1 weighted image), or a group of parametrically
 linked images acquired on the purpose of calculating quantitative maps
-(e.g. three 3D volumes provided as an input to the multiparametric mapping 
-protocol) and/or the quantitative parameter maps themselves (e.g. T1map etc.). 
+(e.g. three 3D volumes provided as an input to the multiparametric mapping
+protocol) and/or the quantitative parameter maps themselves (e.g. T1map etc.).
 
 All anatomy imaging data filenames can include the key/value pairs of
-`run-<index>`, `ce-<label>` or `rec-<label>`. 
+`run-<index>`, `ce-<label>` or `rec-<label>`.
 
-If the same acquisition for a given `_suffix` is repeated without any parameter 
+If the same acquisition for a given `_suffix` is repeated without any parameter
 changes, they must be indexed with the key/value pair of `run-<index>`:
 `_run-1`, `_run-2`, `_run-3` etc. (only integers are allowed as run numbers).
 When there is only one scan of a given type, the run key MAY be omitted.
@@ -156,7 +156,7 @@ referenced by a defacemask image:
 
 ```
 sub-01_mod-T1w_defacemask.nii.gz
-sub-01_mod-T1w_defacemask.json 
+sub-01_mod-T1w_defacemask.json
 ```
 
 Some meta information about the acquisition MAY be provided in an additional
@@ -174,8 +174,8 @@ scans:
 #### Suffix
 
 If a structural data is not intended for creating a quantitative map, the use of
-`_suffix` is REQUIRED (along with the common key/value pairs if applicable) to 
-provide a self explanatory filename. For example: 
+`_suffix` is REQUIRED (along with the common key/value pairs if applicable) to
+provide a self explanatory filename. For example:
 
 ```Text
 sub-01_run-1_T1w.nii.gz
@@ -184,24 +184,24 @@ sub-01_run-2_T1w.nii.gz
 sub-01_run-2_T1w.json
 ```
 
-The `run-<index>` in the example above denotes the index of the acquisition 
-repeated with the identical parameters (e.g. to achieve a higher SNR). Please 
+The `run-<index>` in the example above denotes the index of the acquisition
+repeated with the identical parameters (e.g. to achieve a higher SNR). Please
 note that changing parameters between multiple acquisitions of the same sequence
 creates a different use case: parametrically linked anatomical images.
 
 If a structural data is a member of parametrically linked anatomical images,
-the use of `_suffix` alone cannot distinguish individual acquisitions from each 
-other, failing to identify their roles as inputs to the calculation of 
+the use of `_suffix` alone cannot distinguish individual acquisitions from each
+other, failing to identify their roles as inputs to the calculation of
 quantitative maps. Although, such images are REQUIRED to be grouped by a proper
 `_suffix` (please see the list of available suffixes), they are also RECOMMENDED
-to include at least one of the `acq-<label>`, `part-<label>` and 
+to include at least one of the `acq-<label>`, `part-<mag/phase>` and 
 `<indexable_metadata>-<index>` key/value pairs (please visit corresponding 
 sections for details).  
 
-Please note that not only parametrically linked anatomical images, but also 
-outputs (quantitative maps) created by processing these files fall into the 
-category of anatomy imaging data. In addition, in some cases, quantitative maps 
-can be obtained right off the scanner without the need of storing any 
+Please note that not only parametrically linked anatomical images, but also
+outputs (quantitative maps) created by processing these files fall into the
+category of anatomy imaging data. In addition, in some cases, quantitative maps
+can be obtained right off the scanner without the need of storing any
 parametrically linked anatomical images and further processing. For both cases,
 a proper `_suffix` is REQUIRED for describing quantitative maps. Please see the
 list of available suffixes.   
@@ -213,7 +213,7 @@ list of available suffixes.
 | Proton density weighted images                         | PDw       | Denotes images with predominant PD contrast.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Variable flip angle                                    | VFA       | Groups together parametrically linked anatomical images for T1 mapping. The VFA method involves at least two spoiled gradient echo images with different flip angles. The `<indexable_metadata>-<index>` of `fa-<index>` is REQUIRED for the images grouped by this suffix. Associated output suffixes: T1map                                                                                                                                                                                                                                      |
 | Inversion recovery (for T1 mapping)                    | IRT1      | Groups together parametrically linked anatomical images for T1 mapping. The IRT1 method involves multiple inversion recovery spin-echo images acquired at different inversion times. The `<indexable_metadata>-<index>` of `inv-<index>` is REQUIRED for the images grouped by this suffix. Associated output suffixes: T1map                                                                                                                                                                                                                      |
-| Magnetization prepared two gradient echoes             | MP2RAGE   | Groups together parametrically linked anatomical images (primarily) for T1 mapping. The MP2RAGE method is a special protocol that collects several images at different flip angles and inversion times to create a parametric T1map by combining the magnitude and phase images. The `<indexable_metadata>-<index>` key/value pairs of `inv-<index>` and `fa-<index>`, and `part-<label>` key/value pair are REQUIRED for the images grouped by this suffix. Associated output suffixes: T1map, UNIT1                                              |
+| Magnetization prepared two gradient echoes             | MP2RAGE   | Groups together parametrically linked anatomical images (primarily) for T1 mapping. The MP2RAGE method is a special protocol that collects several images at different flip angles and inversion times to create a parametric T1map by combining the magnitude and phase images. The `<indexable_metadata>-<index>` key/value pairs of `inv-<index>` and `fa-<index>`, and `part-<mag/phase>` key/value pair are REQUIRED for the images grouped by this suffix. Associated output suffixes: T1map, UNIT1                                              |
 | Multi-echo spin echo                                   | MESET2    | Groups together parametrically linked anatomical images for T2 mapping.The MESET2 method involves multiple spin echo images acquired at different echo times. The `<indexable_metadata>-<index>` key/value pair of `echo-<index>` is REQUIRED for the images grouped by this suffix. Associated output suffixes: T2map                                                                                                                                                                                                                             |
 | Multi-echo gradient echo                               | MEGRE     | Groups together parametrically linked multiple anatomical gradient echo images acquired at different echo times. The `<indexable_metadata>-<index>` key/value pair of `echo-<index>` is REQUIRED for the images grouped by this suffix. Associated output suffixes can be: T2starmap, R2starmap, when used for T2* mapping.                                                                                                                                                                                                                            |
 | Magnetization transfer ratio                           | MTR       | Groups together parametrically linked anatomical images for calculating a semi-quantitative magnetization transfer ratio map. The MTR method involves two sets of anatomical images that differ in terms of the application of a magnetization transfer RF pulse (`MTon` or `MToff`). The `acq-<label>` key/value pair is REQUIRED to be used with `MTon` and `MToff` labels for the images grouped by this suffix. Associated output suffixes: MTRmap                                                                                             |
@@ -225,6 +225,7 @@ list of available suffixes.
 | Longitudinal relaxation rate map                       | R1map     | In seconds<sup>-1</sup> (1/s). R1 maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | True transverse relaxation rate map                    | R2map     | In seconds<sup>-1</sup> (1/s). R2 maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Observed transverse relaxation rate map                | R2starmap | In seconds<sup>-1</sup> (1/s). R2* maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Observed signal amplitude map                          | S0map | In arbitrary units (a.u.). For a multi-echo sequence, S0 maps index the baseline signal before exponential (T2*) signal decay. In other words: the exponential of the intercept for a linear decay model across log-transformed echos. For more information, please see, for example, [the tedana documentation](https://tedana.readthedocs.io/en/latest/approach.html#monoexponential-decay-model-fit). S0 maps are REQUIRED to use this suffix irrespective of the method they are related to. Associated suffixes: T2starmap.                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Proton density map                                     | PDmap     | In arbitrary units (a.u.). PD maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Magnetization transfer ratio map                       | MTRmap    | In percentage (%). MTR maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Magnetization transfer saturation index map            | MTsat     | In arbitrary units (a.u.). MTsat maps are REQUIRED to use this suffix irrespective of the method they are related to.                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -235,16 +236,16 @@ list of available suffixes.
 
 #### `<indexable_metadata>-<index>` key-value pair
 
-If the grouping logic of a set of parametrically linked anatomical images is 
+If the grouping logic of a set of parametrically linked anatomical images is
 (entirely or partially) bound up with a metadata field that varies from image to
 image, `<indexable_metadata>-<index>` SHOULD be included in the file name. This
 is applicable if the varying entries of the same metadata field are enumerable.
 
-Unlike other key/value pairs, key tag of the `<indexable_metadata>-<index>` is 
+Unlike other key/value pairs, key tag of the `<indexable_metadata>-<index>` is
 mutable depending on the metadata field that varies between several scans of the
 same modality and can appear more than once in the filename with different keys.
 
-Please note that the order of the `index` and the value of the associated 
+Please note that the order of the `index` and the value of the associated
 metadata field do NOT have to be coherent (i.e. `fa-1`,`fa-2` and `fa-3` can
 correspond to the `FlipAngle` of `35`, `10` and `25` degrees), and the actual
 values need to be stored in the corresponding metadata field of the separate 
@@ -284,11 +285,11 @@ specification is REQUIRED to extend the list above.
 If the grouping logic of a set of parametrically linked anatomical images is
 (entirely or partially) bound up with a metadata field that varies from image to
 image, `acq-<label>` SHOULD be included in the file name. This is applicable if
-the varying entries of the metadata field are categorical. 
+the varying entries of the metadata field are categorical.
 
 Note that value of the `acq-<label>` is free form. However, to enable a unified
 naming convention while combining several scans of the same modality intended to
-create quantitative maps, following labels SHOULD be included in the filename 
+create quantitative maps, following labels SHOULD be included in the filename
 where applicable:
 
 | Respective suffix | Labels           | Related metadata fields   |
@@ -308,11 +309,18 @@ sub-01_echo-1_acq-T1w_MPM.nii.gz
 sub-01_echo-1_acq-T1w_MPM.json
 ```
 
-#### `part-<label>` key/value pair
+#### `part-<mag/phase>` key/value pair
 
 Some parametrically linked anatomical images involve both magnitude and phase  
+<<<<<<< HEAD
+reconstructed images in the calculation of a parameter map. In that case, the
+filename MUST make use of this key/value pair to distinguish between them.
+=======
 reconstructed images in the calculation of a parameter map. In that case, the 
 filename MUST make use of this key/value pair to distinguish between them. 
+Phase images SHOULD be in radians and have a range of (0, 2 pi]
+(including 0, excluding 2 pi).
+>>>>>>> dcab1ad3755c7cb2fbb1a7927a24bf9753f2824a
 The `part-<mag/phase>` key/value pair is associated with the DICOM tag 0008,0008
 `Image Type`.
 
